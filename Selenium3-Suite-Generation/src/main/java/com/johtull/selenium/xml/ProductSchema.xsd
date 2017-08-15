@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- To generate, ensure Eclipse is using the JDK (not JRE):
+	Window -> Preferences -> Java -> Installed JREs
+	Help -> Install New Software -> Work With: All Available Sites, search for Dali
+ -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="mapping-root">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="mappingList" minOccurs="0" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="catentry-mapping" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element type="xsd:string" name="id" minOccurs="0" maxOccurs="1"/>
+										<xsd:element type="xsd:string" name="name" minOccurs="0" maxOccurs="1"/>
+										<xsd:element type="xsd:string" name="shortDescription" minOccurs="0" maxOccurs="1"/>
+										<xsd:element type="xsd:string" name="url" minOccurs="0" maxOccurs="1"/>
+										<xsd:element type="xsd:string" name="type" minOccurs="0" maxOccurs="1"/>
+										<xsd:element type="xsd:string" name="image" minOccurs="0" maxOccurs="1"/>
+										<xsd:element name="item-names" minOccurs="0" maxOccurs="1">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="item-name" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element> 
+						</xsd:sequence>					
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
