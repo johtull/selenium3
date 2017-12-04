@@ -15,7 +15,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +22,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,7 +30,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.beust.jcommander.JCommander;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-
 import com.johtull.selenium.SeleniumSettings;
 import com.johtull.selenium.xml.MappingRoot;
 import com.johtull.selenium.xml.MappingRoot.MappingList;
@@ -194,17 +192,13 @@ public class Selenium3WebDriver {
 	public static FirefoxDriver newFFDriver(String ffBinaryPath) {
 		File pathToBinary = new File(ffBinaryPath);
 		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-		FirefoxProfile firefoxProfile = new FirefoxProfile();
-		firefoxProfile.setPreference("xpinstall.signatures.required", false);
-		firefoxProfile.setPreference("plugin.disable_full_page_plugin_for_types", "application/pdf");
-		return (new FirefoxDriver(ffBinary,firefoxProfile));
-		/*
-		File pathToBinary = new File(ffBinaryPath);
-		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+		//FirefoxProfile firefoxProfile = new FirefoxProfile();
+		//firefoxProfile.setPreference("xpinstall.signatures.required", false);
+		//firefoxProfile.setPreference("plugin.disable_full_page_plugin_for_types", "application/pdf");
 		
-		FirefoxOptions ffOptions = new FirefoxOptions();
-		ffOptions.setBinary(ffBinary);
-		*/
+		FirefoxOptions options = new FirefoxOptions();
+		options.setBinary(ffBinary);
+		return (new FirefoxDriver(options));
 	}
 	
 	/**
@@ -266,7 +260,7 @@ public class Selenium3WebDriver {
 			}
 			
 			// if enabled, debug mismatching images
-			if(StringUtils.isNotEmpty(imgSrc)) {
+			if(imgSrc != null && !imgSrc.isEmpty()) {
 				if(!imgVerify.contains(imgSrc)) {
 					throw new Exception(String.format("Finish image mismatch - Finish: %s - Modal: %s\n", imgVerify, imgSrc));
 				}
@@ -302,10 +296,10 @@ public class Selenium3WebDriver {
 	 * @return formatted string
 	 */
 	private static String normalizeName(String str) {
-		if(!StringUtils.isEmpty(str)) {
-			// TM	™	&#8482; or &#153;
-			// R	®	&#174;
-			str = str.replaceAll("(®|™|&#8482;|&#174;|&#153;)","*").trim();
+		if(str != null && !str.isEmpty()) {
+			// TM	ï¿½	&#8482; or &#153;
+			// R	ï¿½	&#174;
+			str = str.replaceAll("(ï¿½|ï¿½|&#8482;|&#174;|&#153;)","*").trim();
 			str = str.replaceAll("\\s{2,}", " ");
 		}
 		return str;

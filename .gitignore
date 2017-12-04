@@ -1,2 +1,10 @@
 
 Selenium3-Suite-Generation/.settings/org.eclipse.jdt.core.prefs
+
+Selenium3-Suite-Generation/products/
+
+Selenium3-Suite-Generation/qa/
+
+Selenium3-Suite-Generation/RunSelenium3Tests\.bat
+
+*.exe
